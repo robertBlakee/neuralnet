@@ -194,7 +194,7 @@ function predictLoop() {
       STATUS.innerText = 'Prediction: ' + CLASS_NAMES[highestIndex] + ' with ' + Math.floor(predictionArray[highestIndex] * 100) + '% confidence';
       
       //send sign code to Arduino
-      if( predictionArray[ highestIndex ] >= 0.99 ){
+      if( predictionArray[ highestIndex ] >= 0.97 ){
       	switch( highestIndex ){
       		case 0:		client.publish( 'SRP_topic', 's' );	break;
       		case 1:		client.publish( 'SRP_topic', 'f' );	break;
