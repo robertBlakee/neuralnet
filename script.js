@@ -212,8 +212,21 @@ async function readFile( file ){
 //Save image data - button handler
 async function imageData_save(){
 	//if( model == undefined ) return;
+
+    let tensorAsArray[2];
 	
-    let tensorAsArray = tf.tidy(function() {
+    tensorAsArray[0] = tf.tidy(function() {
+      let videoFrameAsTensor = tf.browser.fromPixels(VIDEO);
+      let resizedTensorFrame = tf.image.resizeBilinear(videoFrameAsTensor, [MOBILE_NET_INPUT_HEIGHT, 
+          MOBILE_NET_INPUT_WIDTH], true);
+      let normalizedTensorFrame = resizedTensorFrame.div(255);
+      
+      let tensor = normalizedTensorFrame;
+      return tensor.arraySync();
+      //return mobilenet.predict(normalizedTensorFrame.expandDims()).squeeze();
+    });
+
+    tensorAsArray[1] = tf.tidy(function() {
       let videoFrameAsTensor = tf.browser.fromPixels(VIDEO);
       let resizedTensorFrame = tf.image.resizeBilinear(videoFrameAsTensor, [MOBILE_NET_INPUT_HEIGHT, 
           MOBILE_NET_INPUT_WIDTH], true);
