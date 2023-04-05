@@ -213,10 +213,21 @@ async function readFile( file ){
 async function imageData_save(){
 	//if( model == undefined ) return;
 	
-	console.log( trainingDataInputs );
+    let tensorAsArray = tf.tidy(function() {
+      let videoFrameAsTensor = tf.browser.fromPixels(VIDEO);
+      let resizedTensorFrame = tf.image.resizeBilinear(videoFrameAsTensor, [MOBILE_NET_INPUT_HEIGHT, 
+          MOBILE_NET_INPUT_WIDTH], true);
+      let normalizedTensorFrame = resizedTensorFrame.div(255);
+      
+      let tensor = normalizedTensorFrame;
+      return tensor.arraySync();
+      //return mobilenet.predict(normalizedTensorFrame.expandDims()).squeeze();
+    });
+
+	console.log( tensorAsArray );
 
   var a = document.createElement("a");
-  a.href = URL.createObjectURL( new Blob([JSON.stringify( trainingDataInputs )], {type: "application/json"}) );
+  a.href = URL.createObjectURL( new Blob([JSON.stringify( tensorAsArray )], {type: "application/json"}) );
   a.setAttribute("download", "data");
   document.body.appendChild(a);
   a.click();
