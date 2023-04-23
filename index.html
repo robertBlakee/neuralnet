@@ -32,17 +32,22 @@
   	<button id = "imageData_load">Load training data</button>
   	<button id = "imageData_save">Save training data</button>
   	<button id = "cModel_save">Save classification model</button>
-  	<br><br><br><br><br>
+  	<br><br><br><br><br><br>
 
     <p id = "status">Awaiting image features extraction model load</p>
-    <video id = "webcam" autoplay muted></video>
-    
+    <table><tr>
+      <td>
+        <video id = "webcam" autoplay muted></video>
+      </td>
+      <td>
     <button class = "dataCollector"  data-1hot = "0"  data-name = "Stop">|Stop|</button>
     <button class = "dataCollector"  data-1hot = "1"  data-name = "Go">|Go|</button>
     <button class = "dataCollector"  data-1hot = "2"  data-name = "Left">|Left|</button>
     <button class = "dataCollector"  data-1hot = "3"  data-name = "Right">|Right|</button>
     <button class = "dataCollector"  data-1hot = "4"  data-name = "Turbo">|Turbo|</button>
     <br><br><br><br>
+      </td>
+    </tr></table>
     
     <button id = "train">Train</button>
     <button id = "reset">Reset</button>
